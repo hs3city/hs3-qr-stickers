@@ -1,5 +1,5 @@
-from local import stickers_folder                  #Local file: database information, fonts, paths to local folders
-from sticker_generator import generate_stickers    #Local file: generating stickers
+from local import stickers_folder           # Database information, fonts, paths to local folders
+from sticker_generator import *             # Generating stickers and operations on them
 import os
 
 # TITLE:        QR CODE STICKER GENERATOR
@@ -14,3 +14,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

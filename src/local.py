@@ -1,12 +1,14 @@
 import os
 
 # ------------------------ LOCAL FOLDERS ------------------------ #
-main_script_folder = os.path.dirname(__file__)
-stickers_folder = os.path.join(main_script_folder, "stickers")
+script_folder = os.path.dirname(__file__)
+main_folder = os.path.dirname(script_folder)
+stickers_folder = os.path.join(main_folder, "stickers")
+assets_folder = os.path.join(main_folder, "assets")
 source_sans_pro = os.path.join(
-    main_script_folder, "Source_Sans_Pro", "SourceSansPro-Regular.ttf"
+    assets_folder, "Source_Sans_Pro", "SourceSansPro-Regular.ttf"
 )
-hs3_logo = os.path.join(main_script_folder, "logo.png")
+hs3_logo = os.path.join(assets_folder, "logo.png")
 
 # ----------------------- GITHUB TREE SHA ----------------------- #
 
