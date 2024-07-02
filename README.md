@@ -11,4 +11,4 @@ A Python script that generates stickers with QR code based on projects on hs3.pl
 
 ## Sample sticker
 
-![sample sticker](assets\sample_sticker.png)
+![sample sticker](assets/sample_sticker.png)
