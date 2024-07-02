@@ -28,12 +28,10 @@ label_start_y = 2 * sticker_margin + qr_size  # px
 
 
 # -----------------------------GENERATING STICKERS---------------------------------#
-def generate_sticker(file):
+def generate_sticker(project_name, url):
     """
     Generate a single QR sticker and save it in a predefined repository folder.
     """
-    project_name = file.path.split(".")[0]
-    url = f"https://hs3.pl/projekty/{project_name}"
     qrcode = segno.make_qr(url)
     out = io.BytesIO()
     qrcode.save(out, border=0, scale=5, kind="png")
@@ -50,7 +48,7 @@ def generate_sticker(file):
     background.save(end_folder)
 
 
-def generate_stickers():
+def gh_generate_stickers():
     """
     Generate QR stickers based on all files in the repository folder.
     """
@@ -60,7 +58,9 @@ def generate_stickers():
     for file in tree:
         if file.path[0] != "_":
             print(file)
-            generate_sticker(file)
+            project_name = file.path.split(".")[0]
+            url = f"https://hs3.pl/projekty/{project_name}"
+            generate_sticker(project_name, url)
 
 
 # ---------------------------------VALIDATING STICKERS-------------------------------------#
@@ -117,7 +117,7 @@ def merge_to_a4():
 
     stickers_pdf_name = os.path.join(stickers_folder, "stickers_merged.pdf")
 
-    sticker_counter = 1
+    sticker_counter = 0
     page_counter = 1
     offset_x = page_margin
     offset_y = page_margin
@@ -129,16 +129,17 @@ def merge_to_a4():
                 sticker_counter += 1
                 background.paste(sticker_img, (offset_x, offset_y))
                 offset_y += stickers_size["height"]
-                if (sticker_counter % stickers_per_column) == 0:  # New column
-                    offset_x += stickers_size["width"]
-                    offset_y = page_margin
                 if (sticker_counter == stickers_per_page):  # New page for the stickers, resetting counter and offsets
                     background.save(stickers_pdf_name)
                     background = Image.new(mode="RGB", size=[A4_SIZE["width"], A4_SIZE["height"]], color=WHITE)
                     offset_x = page_margin
                     offset_y = page_margin
-                    sticker_counter = 1
+                    sticker_counter = 0
                     page_counter += 1
+                    continue
+                if (sticker_counter % stickers_per_column) == 0:  # New column
+                    offset_x += stickers_size["width"]
+                    offset_y = page_margin
     background.save(stickers_pdf_name) # Last page
 
 

@@ -8,8 +8,8 @@ import os
 # LICENSE:      MIT license
 
 def main():
-    generate_stickers()
-    # merge_to_a4() # TO DO
+    gh_generate_stickers()
+    merge_to_a4()
     os.startfile(stickers_folder)
 
 if __name__ == "__main__":
